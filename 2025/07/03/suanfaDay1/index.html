@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><title>算法题记录Day1 | Nighttellの小世界</title><meta name="author" content="Nighttell"><meta name="description" content="一个小菜鸡的博客"><meta name="keywords" content=""><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><link rel="icon" href="https://nighttellpic.netlify.app/head.jpg"><script src="https://cdn.staticfile.org/vue/3.3.4/vue.global.prod.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="/css/fonts.min.css"><script>const mixins={}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script><script src="https://cdn.staticfile.org/highlight.js/11.8.0/highlight.min.js"></script><script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.8.0/styles/github.min.css"><script src="/js/lib/highlight.js"></script><script src="/js/lib/preview.js"></script><link rel="stylesheet" href="/css/main.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="layout"><transition name="fade"><div id="loading" v-show="loading"><div id="loading-circle"><h2>LOADING</h2><p>加载过慢请开启缓存 浏览器默认开启</p><img src="/images/loading.gif"></div></div></transition><div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}"><nav id="desktop-menu"><a class="title" href="/"><span>NIGHTTELLの小世界</span> </a><a href="/"><i class="fa-solid fa-house fa-fw"></i> <span>&ensp;Home</span> </a><a href="/about"><i class="fa-solid fa-id-card fa-fw"></i> <span>&ensp;About</span> </a><a href="/archives"><i class="fa-solid fa-box-archive fa-fw"></i> <span>&ensp;Archives</span> </a><a href="/categories"><i class="fa-solid fa-bookmark fa-fw"></i> <span>&ensp;Categories</span> </a><a href="/tags"><i class="fa-solid fa-tags fa-fw"></i> <span>&ensp;Tags</span></a></nav><nav id="mobile-menu"><div class="title" @click="showMenuItems = !showMenuItems"><i class="fa-solid fa-bars fa-fw"></i> <span>&emsp;NIGHTTELLの小世界</span></div><transition name="slide"><div class="items" v-show="showMenuItems"><a href="/"><div class="item"><div style="min-width:20px;max-width:50px;width:10%"><i class="fa-solid fa-house fa-fw"></i></div><div style="min-width:100px;max-width:150%;width:20%">Home</div></div></a><a href="/about"><div class="item"><div style="min-width:20px;max-width:50px;width:10%"><i class="fa-solid fa-id-card fa-fw"></i></div><div style="min-width:100px;max-width:150%;width:20%">About</div></div></a><a href="/archives"><div class="item"><div style="min-width:20px;max-width:50px;width:10%"><i class="fa-solid fa-box-archive fa-fw"></i></div><div style="min-width:100px;max-width:150%;width:20%">Archives</div></div></a><a href="/categories"><div class="item"><div style="min-width:20px;max-width:50px;width:10%"><i class="fa-solid fa-bookmark fa-fw"></i></div><div style="min-width:100px;max-width:150%;width:20%">Categories</div></div></a><a href="/tags"><div class="item"><div style="min-width:20px;max-width:50px;width:10%"><i class="fa-solid fa-tags fa-fw"></i></div><div style="min-width:100px;max-width:150%;width:20%">Tags</div></div></a></div></transition></nav></div><transition name="fade"><div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div></transition><div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'"><div class="article"><div><h1>算法题记录Day1</h1></div><div class="info"><span class="date"><span class="icon"><i class="fa-solid fa-calendar fa-fw"></i> </span>2025/7/3 </span><span class="category"><a href="/categories/%E7%AE%97%E6%B3%95/"><span class="icon"><i class="fa-solid fa-bookmark fa-fw"></i> </span>算法 </a></span><span class="tags"><span class="icon"><i class="fa-solid fa-tags fa-fw"></i> </span><span class="tag"><a href="/tags/%E7%AE%97%E6%B3%95/" style="color:#00bcd4">算法</a> </span><span class="tag"><a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color:#ffa2c4">动态规划</a> </span><span class="tag"><a href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96/" style="color:#00bcd4">记忆化</a> </span><span class="tag"><a href="/tags/DFS/" style="color:#00a596">DFS</a> </span><span class="tag"><a href="/tags/%E4%B8%AD%E7%AD%89%E9%A2%98/" style="color:#ffa2c4">中等题</a></span></span></div><div class="content" v-pre><h1 id="题目1">题目1</h1><p>一个整数矩阵，输出最长严格的递增路径的长度。每个单元格，可以往上，下，左，右四个方向移动。 不能在对角线方向上移动或移动到边界外（即不允许环绕）。</p><p>示例 1:</p><p>输入:</p><pre class="python3"><code>nums = [ [9,9,4], [6,6,8], [2,1,1] ] </code></pre><p>输出:</p><pre class="python3"><code>4 </code></pre><p>解释: 最长递增路径为 [1, 2, 6, 9]。</p><p>示例 2:<br>输入:</p><pre class="python3"><code>nums = [ [3,4,5], [3,2,6], [2,2,1] ] </code></pre><p>输出:</p><pre class="python3"><code>4 </code></pre><p>解释: 最长递增路径是 [3, 4, 5, 6]。<br>注意不允许在对角线方向上移动。</p><hr><h2 id="思路">思路</h2><p>第一眼看见题，想着使用回溯加剪枝（新建一个矩阵用于存储该位置的最大长度）写一版代码如下：</p><pre class="python3"><code>nums = [ [9,9,4], [6,6,8], [2,1,1] ]
+
+m=len(nums)
+mar_nums=[[0]*m]*m
+fx=[(0,1),(1,0),(0,-1),(-1,0)]#右，下，左，上
+
+def dfs(i,j,pre):
+    if i&lt;0 or j&lt;0 or i&gt;m or j&gt;m:#边界条件
+        return
+    if nums[i][j]&lt;pre:#当前的大于上一个的
+        return
+    for o,k in fx:#遍历四个方向
+        dfs(i+o,j+k,nums[i][j])
+
+maxnum=-10
+for i in range(0,m):
+    for j in range(0,m):
+        mar_nums[i][j]=dfs(i,j,-10)
+        if maxnum &lt; mar_nums[i][j]:
+            maxnum=mar_nums[i][j]
+
+print(maxnum)</code></pre><p>太久忘了dfs怎么写了。。。。</p><p>场外援助一下</p><pre class="python3"><code>def dfs(i,j,pre,step):
+    if i&lt;0 or j&lt;0 or i&gt;m or j&gt;m:#边界条件
+        return
+    if nums[i][j]&lt;pre:#当前的大于上一个的
+        return
+    for o,k in fx:#遍历四个方向
+        dfs(i+o,j+k,nums[i][j],step+1)</code></pre><p>额外加一个参数传递step</p><p>ps：边界条件都是m是因为是矩阵</p><p>。。。。然后运行报错了。。。。</p><p>RecursionError: maximum recursion depth exceeded in comparison</p><p>请gpt老祖出山</p><pre class="python3"><code>def dfs(i,j,pre,step):
+    if i&lt;0 or j&lt;0 or i&gt;=m or j&gt;=m:#边界条件
+        return step-1
+    if nums[i][j]&lt;=pre:#当前的大于上一个的
+        return step-1
+    max_len = step
+    for o, k in fx:
+        max_len = max(max_len, dfs(i + o, j + k, nums[i][j], step + 1))
+    return max_len</code></pre><p>max_len留的应该是最大长度，</p><p>优化版本的记忆化搜索：</p><pre class="python3"><code>nums = [ [9,9,4], [6,6,8], [2,1,1] ]
+
+m = len(nums)
+n = len(nums[0])
+mar_nums = [[0]*n for _ in range(m)]  # 用于记忆化，记录每个格子的最长路径
+fx = [(0,1),(1,0),(0,-1),(-1,0)]  # 右、下、左、上
+
+def dfs(i, j):
+    if mar_nums[i][j] != 0:
+        return mar_nums[i][j]  # 已计算过，直接返回
+
+    max_len = 1  # 至少包含当前这个点
+    for dx, dy in fx:
+        ni, nj = i + dx, j + dy
+        if 0 &lt;= ni &lt; m and 0 &lt;= nj &lt; n and nums[ni][nj] &gt; nums[i][j]:
+            max_len = max(max_len, 1 + dfs(ni, nj))  # 递归搜索
+
+    mar_nums[i][j] = max_len  # 记忆化存储
+    return max_len
+
+maxnum = 0
+for i in range(m):
+    for j in range(n):
+        maxnum = max(maxnum, dfs(i, j))
+
+print(&quot;最长递增路径长度为：&quot;, maxnum)</code></pre><p>通过下面的进行记忆化，剪枝操作</p><pre class="python3"><code>    if mar_nums[i][j] != 0:
+        return mar_nums[i][j]  # 已计算过，直接返回</code></pre><hr><h1 id="总结">总结</h1><ol type="1"><li>DFS动态规划记得返回</li></ol><p>回溯框架：</p><pre class="python3"><code>def backtracking(path, choices):
+    if termination_condition(path):
+        result.append(path[:])  # 存放结果（注意要复制）
+        return
+
+    for choice in choices:
+        if not is_valid(choice, path):  # 可选，剪枝
+            continue
+
+        path.append(choice)  # 做出选择
+        backtracking(path, choices)  # 递归
+        path.pop()  # 回溯，撤销选择</code></pre><p>接下来练习的题单：（来源于chagpt）</p><p>✅ 第一阶段：基础递归理解「返回值+1」的结构<br>1. Leetcode 104. 二叉树的最大深度<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/" class="uri">https://leetcode.cn/problems/maximum-depth-of-binary-tree/</a><br>目标：理解如何从叶子往回返回「深度」值<br>关键词：return 1 + max(dfs(left), dfs(right))</p><ol start="2" type="1"><li>Leetcode 733. 图像渲染（Flood Fill）<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flood-fill/" class="uri">https://leetcode.cn/problems/flood-fill/</a><br>目标：理解如何用 DFS 走遍一张图<br>关键词：探索四个方向，递归不返回值，但有“已访问”逻辑<br>（这个虽然不加1，但会练你方向遍历和边界剪枝）</li></ol><p>✅ 第二阶段：路径型递归 + 返回路径长度<br>3. Leetcode 329. 矩阵中的最长递增路径<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/" class="uri">https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/</a><br>目标：你现在研究的就是这个题目！<br>关键词：1 + dfs(...)，方向遍历 + 记忆化</p><ol start="4" type="1"><li><p>Leetcode 62. 不同路径（递归版）<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/" class="uri">https://leetcode.cn/problems/unique-paths/</a><br>目标：练习“从当前格子出发有几条路径到终点”<br>关键词：return dfs(i+1,j) + dfs(i,j+1)</p></li><li><p>Leetcode 198. 打家劫舍（带返回值的DP递归）<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/" class="uri">https://leetcode.cn/problems/house-robber/</a><br>目标：理解“当前选择 = 子问题最大值 + 当前值”<br>关键词：dp[i] = max(dp[i-1], dp[i-2] + nums[i])</p></li></ol><p>✅ 第三阶段：通用回溯 + 路径长度统计（练回溯框架）<br>6. Leetcode 17. 电话号码的字母组合<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/" class="uri">https://leetcode.cn/problems/letter-combinations-of-a-phone-number/</a><br>目标：练习标准回溯框架（递归 + 回溯）<br>关键词：path.append(...) -&gt; backtrack(...) -&gt; path.pop()</p><ol start="7" type="1"><li>Leetcode 46. 全排列<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/" class="uri">https://leetcode.cn/problems/permutations/</a><br>目标：更熟练回溯法中“选择-递归-撤销”的流程<br>关键词：构造路径、遍历集合、回退</li></ol><p>✅ 加餐题（深度或路径最值递归）：<br>8. Leetcode 687. 最长同值路径<br><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-univalue-path/" class="uri">https://leetcode.cn/problems/longest-univalue-path/</a><br>目标：dfs 过程中计算“跨越左右子树的路径长度”，非常典型的 return 1 + dfs(...) 问题。</p></div><div id="comment"><div id="giscus-container" class="giscus"></div></div></div><footer id="footer"><div id="footer-wrap"><div>&copy; 2022 - 2025 Nighttellの小世界 <span id="footer-icon"><i class="fa-solid fa-font-awesome fa-fw"></i> </span>&commat;Nighttell</div><div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a></div></div></footer></div><transition name="fade"><div id="preview" ref="preview" v-show="previewShow"><img id="preview-content" ref="previewContent"></div></transition></div><canvas id="fireworks" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:32767"></canvas><script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script><script src="/js/fireworks.min.js"></script><canvas id="background" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1"></canvas><script src="/js/background.min.js"></script><script src="/js/main.js"></script><script src="https://giscus.app/client.js" data-repo="Nighttell/comment" data-repo-id="R_kgDOKS6dPw" data-category="Announcements" data-category-id="DIC_kwDOKS6dP84CZRPV" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin async></script></body></html>
